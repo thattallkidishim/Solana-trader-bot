@@ -1,17 +1,22 @@
 import os
+import sys
 
-# ── RPC ─────────────────────────────────────────────────────────────────────
-HELIUS_RPC = os.getenv(
-    "HELIUS_RPC",
-    "https://mainnet.helius-rpc.com/?api-key=8eb04f39-2eba-4d18-a084-cee9411c77d2",
-)
+# ── RPC ──────────────────────────────────────────────────────────────────────
+HELIUS_RPC = os.getenv("HELIUS_RPC", "")
 
 # ── TELEGRAM ─────────────────────────────────────────────────────────────────
-TELEGRAM_TOKEN   = os.getenv("TELEGRAM_TOKEN",   "8657193319:AAEzM6EGsaeR0he1LGxYJaZCwKuD8gjCPsw")
-TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "7422927932")
+TELEGRAM_TOKEN   = os.getenv("TELEGRAM_TOKEN", "")
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "")
+
+# ── STARTUP VALIDATION ───────────────────────────────────────────────────────
+if not HELIUS_RPC:
+    sys.exit("MISSING ENV VAR: HELIUS_RPC")
+if not TELEGRAM_TOKEN:
+    sys.exit("MISSING ENV VAR: TELEGRAM_TOKEN")
+if not TELEGRAM_CHAT_ID:
+    sys.exit("MISSING ENV VAR: TELEGRAM_CHAT_ID")
 
 # ── TRADING MODE ─────────────────────────────────────────────────────────────
-# Railway env var: PAPER_TRADE=false → live. Anything else = paper.
 PAPER_TRADE = os.getenv("PAPER_TRADE", "true").strip().lower() != "false"
 
 # ── CAPITAL ──────────────────────────────────────────────────────────────────
