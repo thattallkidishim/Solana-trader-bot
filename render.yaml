@@ -1,0 +1,17 @@
+services:
+  - type: worker
+    name: solana-trader-bot
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python main.py
+    envVars:
+      - key: HELIUS_RPC
+        sync: false
+      - key: TELEGRAM_TOKEN
+        sync: false
+      - key: TELEGRAM_CHAT_ID
+        sync: false
+      - key: PAPER_TRADE
+        value: true
+      - key: STARTING_CAPITAL_USD
+        value: "10.0"
